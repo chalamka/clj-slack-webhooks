@@ -15,6 +15,7 @@
     "Hello World")
   (POST "/slack"
     [token team_id team_domain channel_id channel_name timestamp user_id user_name text trigger_word :as request]
+    (println "post received")
     (-> request :params :text tokenize-message parse-tokens process-request))
   (route/not-found "Not Found"))
 
@@ -25,4 +26,6 @@
   (json/generate-string {:response params}))
 
 (defn -main [& args]
-  (run-server (site #'api) {:port 3000}))
+  (do
+    (println "starting server")
+    (run-server (site #'api) {:port 3000})))
