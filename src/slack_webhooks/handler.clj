@@ -23,7 +23,7 @@
   (wrap-defaults api-routes api-defaults))
 
 (defn process-request [params]
-  (json/generate-string {:response params}))
+  (json/generate-string {:text params}))
 
 (defn -main [& args]
   (do

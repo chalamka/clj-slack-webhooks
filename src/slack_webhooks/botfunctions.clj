@@ -1,7 +1,7 @@
 (ns slack-webhooks.botfunctions)
 
 (defn foo [& args]
-  "test successful!")
+  "message post successful!")
 
 (defn stats [args]
   (let [name (first args)]
