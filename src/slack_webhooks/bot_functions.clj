@@ -8,4 +8,4 @@
     (str "Stats for " name)))
 
 (defn commands [args]
-  (keys (ns-interns 'slack-webhooks.bot_functions)))
+  (str (keys (ns-interns 'slack-webhooks.bot_functions))))
