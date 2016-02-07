@@ -1,6 +1,16 @@
 (ns slack-webhooks.parser
   (:require [clojure.string :refer [split lower-case]]
-            [slack-webhooks.botfunctions]))
+            [slack-webhooks.bot_functions]))
+
+(defn in?
+  "true if seq contains elm"
+  [seq elm]
+  (some #(= elm %) seq))
+
+(defn valid-fn?
+  "test if token is a fn in botfunctions namespace"
+  [token]
+  (in? (keys (ns-interns 'slack-webhooks.bot_functions)) (symbol token)))
 
 (defn tokenize-message
   "Tokenize a line from slack, removing the first token (trigger word)"
@@ -10,9 +20,7 @@
 (defn parse-tokens
   "Resolve a token -> function and call it with the remaining tokens"
   [tokens]
-  (if tokens
-    (if-let [bot-fn (ns-resolve 'slack-webhooks.botfunctions (symbol (first tokens)))]
-      (if (fn? @bot-fn)
-        (bot-fn (rest tokens))
-        (str (first tokens) " isn't a valid function."))
-      (str "Could not resolve " (first tokens) " as a function."))))
+  (if (valid-fn? (first tokens))
+    (let [bot-fn (ns-resolve 'slack-webhooks.bot_functions (symbol (first tokens)))]
+      (bot-fn (rest tokens)))
+    (str "Could not resolve " (first tokens) " as a function.")))
