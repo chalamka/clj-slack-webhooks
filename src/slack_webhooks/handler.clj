@@ -29,9 +29,8 @@
     "Hello World")
   (POST "/slack"
     [token team_id team_domain channel_id channel_name timestamp user_id user_name text trigger_word :as request]
-    (println "post received")
     (if (verify-token token)
-      (-> request :params :text tokenize-message parse-tokens process-request)
+      (-> request :params :text tokenize-message resolve-tokens process-request)
       nil))
   (route/not-found "Not Found"))
 

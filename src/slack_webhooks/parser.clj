@@ -13,11 +13,21 @@
   (in? (keys (ns-interns 'slack-webhooks.bot_functions)) (symbol token)))
 
 (defn tokenize-message
-  "Tokenize a line from slack, removing the first token (trigger word)"
+  "Tokenize a line from slack"
   [message]
-  (rest (split (lower-case message) #"\W+")))
+  (split (lower-case message) #" "))
 
-(defn parse-tokens
+(defn at-message?
+  "test if token is an @message"
+  [token]
+  (re-matches #"@\w+" token))
+
+(defn get-recipients
+  "return all @messages from a list of strongs"
+  [tokens]
+  (filter at-message? tokens))
+
+(defn resolve-tokens
   "Resolve a token -> function and call it with the remaining tokens"
   [tokens]
   (if (valid-fn? (first tokens))
