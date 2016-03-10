@@ -1,6 +1,7 @@
 (ns slack-webhooks.parser-test
   (:require [clojure.test :refer :all]
-            [slack-webhooks.parser :refer :all]))
+            [slack-webhooks.parser :refer :all]
+            [slack-webhooks.helpers :refer :all]))
 
 (deftest test-in?
   (testing "Returns if an element is or is not in a seq"

@@ -20,9 +20,7 @@
   (json/generate-string {:text params}))
 
 (defn verify-token [token]
-  (if (= @api-token token)
-    true
-    false))
+  (= @api-token token))
 
 (defroutes api-routes
   (GET "/" []

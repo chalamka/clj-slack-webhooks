@@ -1,6 +1,7 @@
 # slack-webhooks
 
-Simple webserver to handle requests sent from a slack channel
+Simple webserver to handle requests sent from a slack channel.  Implements a simple group system to aid in 
+messaging specific user groups across channels.
 
 ## Prerequisites
 
@@ -12,8 +13,4 @@ You will need [Leiningen][] 2.0.0 or above installed.
 
 To start a web server for the application, run:
 
-    lein ring server
-
-## License
-
-Copyright © 2016 FIXME
+    lein run
