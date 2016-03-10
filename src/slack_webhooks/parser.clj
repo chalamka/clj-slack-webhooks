@@ -1,11 +1,7 @@
 (ns slack-webhooks.parser
   (:require [clojure.string :refer [split lower-case]]
-            [slack-webhooks.bot_functions]))
-
-(defn in?
-  "true if seq contains elm"
-  [seq elm]
-  (some #(= elm %) seq))
+            [slack-webhooks.bot_functions]
+            [slack-webhooks.helpers :refer [in?]]))
 
 (defn valid-fn?
   "test if token is a fn in botfunctions namespace"
